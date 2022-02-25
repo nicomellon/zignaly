@@ -1,4 +1,4 @@
-from flask import flask
+from flask import Flask
 from flask_restful import Resource, Api
 
 app = Flask(__name__)
@@ -24,9 +24,9 @@ phones = [
 
 class PhoneList(Resource):
     def get(self):
-        return phones
+        return {'phones': phones}
 
 
 api.add_resource(PhoneList, '/phones') 
 
-app.run(port=5000, debug=True)
+app.run(host='0.0.0.0', port=5000, debug=True)
