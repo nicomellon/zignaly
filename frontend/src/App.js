@@ -4,55 +4,14 @@ import './App.css';
 import { useAppSelector } from './hooks';
 import { store } from './store';
 import { setPhones } from './phonesSlice';
-
-function Spinner() {
-  return <p>loading</p>;
-}
-
-function PhoneListContainer({ phones, setShowDetail }) {
-  return (
-    <div className="phone-list">
-      <ul>
-        {phones.map((phone, index) => (
-          <>
-            <li key={index} onClick={() => setShowDetail(phone)}>
-              {phone.name}
-            </li>
-            <hr />
-          </>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function PhoneDetailComponent({ phone }) {
-  console.log(phone);
-  if (!phone) return <div className="phone-detail">Select a phone</div>;
-
-  return (
-    <div className="phone-detail">
-      <img src={phone.image} alt="phone from database" />
-      <div>
-        <div>
-          <h3>
-            {phone.name} <span>({phone.color})</span>
-          </h3>
-          <em>{phone.description}</em>
-        </div>
-        <div>
-          <p>From</p>
-          <b>${phone.price} USD</b>
-        </div>
-      </div>
-    </div>
-  );
-}
+import {
+  Spinner,
+  PhoneListContainer,
+  PhoneDetailComponent,
+} from './components';
 
 function App() {
   const phones = useAppSelector((state) => state.phones);
-  console.log({ phones });
-
   const [showDetail, setShowDetail] = useState(null);
 
   useEffect(() => {
