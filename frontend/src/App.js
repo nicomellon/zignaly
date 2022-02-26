@@ -6,11 +6,22 @@ import { store } from './store';
 import { setPhones } from './phonesSlice';
 
 function PhoneListContainer() {
+  const phones = useAppSelector((state) => state.phones);
+  console.log({ phones });
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:5000/phones')
+      .then((res) => store.dispatch(setPhones(res.data.phones)))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className="phone-list">
       <ul>
-        <li>Phone 1</li>
-        <li>Phone 2</li>
+        {!phones && <p>loading</p>}
+        {phones &&
+          phones.map((phone, index) => <li key={index}>{phone.name}</li>)}
       </ul>
     </div>
   );
@@ -29,16 +40,6 @@ function PhoneDetailComponent() {
 }
 
 function App() {
-  const phones = useAppSelector((state) => state.phones);
-  console.log({ phones });
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:5000/phones')
-      .then((res) => store.dispatch(setPhones(res.data.phones)))
-      .catch((err) => console.log(err));
-  }, []);
-
   return (
     <div className="App">
       <h1>Our phones</h1>
