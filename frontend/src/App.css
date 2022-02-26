@@ -1,38 +1,73 @@
 .App {
+  display: grid;
+  padding: 1em;
+  gap: 1rem;
+  /* Mobile view */
+  grid-template-areas:
+    'a'
+    'b'
+    'c';
+}
+
+@media only screen and (min-width: 768px) {
+  /* Desktop view: */
+  .App {
+    grid-template-areas:
+      'a a'
+      'b c';
+    grid-template-columns: 250px 1fr;
+  }
+}
+
+.app-title {
+  grid-area: a;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.phone-list,
+.phone-detail {
+  border: 1px solid black;
+  border-radius: 1em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.phone-list {
+  grid-area: b;
+  padding: 1em;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.phone-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.phone-list li {
+  color: steelblue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.phone-detail {
+  grid-area: c;
+  display: flex;
+  gap: 1em;
+  padding: 1em;
+}
+
+.phone-detail img {
+  width: 20em;
+}
+
+.phone-detail span {
+  color: gray;
+}
+
+.phone-detail p {
+  color: grey;
+}
+
+.phone-detail > div {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  justify-content: space-between;
 }

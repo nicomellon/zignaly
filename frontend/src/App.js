@@ -5,17 +5,22 @@ import { useAppSelector } from './hooks';
 import { store } from './store';
 import { setPhones } from './phonesSlice';
 
+function Spinner() {
+  return <p>loading</p>;
+}
+
 function PhoneListContainer({ phones, setShowDetail }) {
   return (
     <div className="phone-list">
       <ul>
-        {!phones && <p>loading</p>}
-        {phones &&
-          phones.map((phone, index) => (
+        {phones.map((phone, index) => (
+          <>
             <li key={index} onClick={() => setShowDetail(phone)}>
               {phone.name}
             </li>
-          ))}
+            <hr />
+          </>
+        ))}
       </ul>
     </div>
   );
@@ -27,11 +32,19 @@ function PhoneDetailComponent({ phone }) {
 
   return (
     <div className="phone-detail">
-      <h3>{phone.name}</h3>
-      <p>{phone.description}</p>
-      <img src={phone.image} alt="image of phone" />
-      <p>${phone.price} USD</p>
-      <p>{phone.color}</p>
+      <img src={phone.image} alt="phone from database" />
+      <div>
+        <div>
+          <h3>
+            {phone.name} <span>({phone.color})</span>
+          </h3>
+          <em>{phone.description}</em>
+        </div>
+        <div>
+          <p>From</p>
+          <b>${phone.price} USD</b>
+        </div>
+      </div>
     </div>
   );
 }
@@ -49,9 +62,11 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
+  if (!phones) return <Spinner />;
+
   return (
     <div className="App">
-      <h1>Our phones</h1>
+      <h1 className="app-title">Our phones</h1>
       <PhoneListContainer phones={phones} setShowDetail={setShowDetail} />
       <PhoneDetailComponent phone={showDetail} />
     </div>
