@@ -30,12 +30,12 @@ function PhoneDetailComponent() {
 
 function App() {
   const phones = useAppSelector((state) => state.phones);
-  console.log(phones);
+  console.log({ phones });
 
   useEffect(() => {
     axios
       .get('http://localhost:5000/phones')
-      .then((res) => setPhones(res.data))
+      .then((res) => store.dispatch(setPhones(res.data.phones)))
       .catch((err) => console.log(err));
   }, []);
 

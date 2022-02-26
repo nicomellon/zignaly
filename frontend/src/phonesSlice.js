@@ -6,9 +6,7 @@ export const phonesSlice = createSlice({
   name: 'phones',
   initialState,
   reducers: {
-    setPhones: (state, action) => {
-      state = action.payload;
-    },
+    setPhones: (state, action) => (state = action.payload),
   },
 });
 

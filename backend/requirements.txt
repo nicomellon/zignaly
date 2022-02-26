@@ -1,1 +1,2 @@
 Flask-RESTFUL==0.3.9
+flask-cors==3.0.10
