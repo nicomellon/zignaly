@@ -5,3 +5,16 @@ services:
     build: ./backend
     ports:
       - 5000:5000
+
+  frontend:
+    depends_on:
+      - backend
+    build: ./frontend
+    ports:
+      - 3000:3000
+    environment:
+      API_URL: http://0.0.0.0:5000
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /app
