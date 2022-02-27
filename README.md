@@ -20,4 +20,4 @@ You'll need to have the [docker](https://www.docker.com/products/docker-desktop)
    ```sh
    docker-compose up
    ```
-4. Open the application in your browser at [http://localhost:3000]()
+4. Open the application in your browser at [http://localhost:3000](http://localhost:3000/)
